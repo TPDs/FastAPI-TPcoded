@@ -1,16 +1,19 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
-import os
-from util import pocketbase as pb
+from util.pocketbase import pb_db
+import json
 
 load_dotenv() 
 
 app = FastAPI()
+pb = pb_db().get_db()
 
 
 @app.get("/")
 async def root():
-
-    result =  pb.client.collection('project').get_full_list()
-    print(result)
+    with open('testdata.json') as f:
+        data = json.load(f)
+    result =  pb.collection('project').get_full_list()
+    print(data)
+    
     return result
