@@ -1,22 +1,10 @@
-from pdfquery import PDFQuery
-import fitz, pathlib , sys
+import fitz
 import pandas as pd
 import re
 
-def get_pdf_data(file_path):
-    pdf = PDFQuery(file_path)
-    pdf.load()
-    text_elements = pdf.pq('LTTextLineHorizontal') # type: ignore
-    text = [t.text for t in text_elements]
-    return text
-
-
 
 def get_pdf_data2(file_path):
-    docs = fitz.open(file_path) # type: ignore
-    returndata = []
-    page = docs[1]
-    words = page.get_text("words")     
+    docs = fitz.open(file_path) # type: ignore       
     with docs as doc: # type: ignore
         text = chr(12).join([page.get_text() for page in doc])        
     textlist = text.split(sep='\x0c')
