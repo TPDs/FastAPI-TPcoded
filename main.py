@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import uvicorn
 from util.pocketbase import pb_db
-from util.pdfparser import get_pdf_data2, get_pdf_data
+from util.pdfparser import get_pdf_data2
 import json
 import os
 
