@@ -3,7 +3,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 import uvicorn
 from util.pocketbase import pb_db
-from util.pdfparser import get_pdf_data2
+from util.pdfparser import get_pdf_data2, get_pdf_data
 import json
 import os
 
@@ -25,6 +25,7 @@ async def root():
 @app.get("/pdf")
 async def pdf():
     data = get_pdf_data2('netto.pdf')
+    print(data)
     return data
 
 if __name__ == '__main__':
