@@ -1,7 +1,10 @@
 {
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.autopep8"
     },
     "python.formatting.provider": "none",
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "editor.defaultFormatter": null,
+    "editor.formatOnType": true,
+    "autopep8.importStrategy": "fromEnvironment"
 }
