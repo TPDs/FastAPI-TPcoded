@@ -1,5 +1,3 @@
-from pydrive2.auth import GoogleAuth
-from pydrive2.drive import GoogleDrive
 from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
@@ -10,14 +8,8 @@ import os
 
 load_dotenv() 
 host = os.getenv('HOST')
-demo_doc = os.getenv('DEMO_DOC') 
 app = FastAPI()
 pb = pb_db().get_db()
-
-
-#gauth = GoogleAuth()
-#gauth.LocalWebserverAuth()  # Creates local webserver and auto handles authentication.
-#drive = GoogleDrive(gauth)
 
 
 @app.get("/test")
@@ -27,14 +19,13 @@ async def root():
 
 
 @app.get("/")
-async def get_doc_content():    
-    #content = drive.ListFile().GetList()
+async def get_doc_content():   
+    
     return "content"
 
 
 @app.get("/create")
-async def create_doc_content():  
-    #drive.CreateFile({'title': 'Hello.txt', 'mimeType': 'text/plain'})
+async def create_doc_content():      
     return "test"
 
 
