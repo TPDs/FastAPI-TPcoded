@@ -15,9 +15,9 @@ app = FastAPI()
 pb = pb_db().get_db()
 
 
-gauth = GoogleAuth()
-gauth.LocalWebserverAuth()  # Creates local webserver and auto handles authentication.
-drive = GoogleDrive(gauth)
+#gauth = GoogleAuth()
+#gauth.LocalWebserverAuth()  # Creates local webserver and auto handles authentication.
+#drive = GoogleDrive(gauth)
 
 
 @app.get("/test")
@@ -34,7 +34,7 @@ async def get_doc_content():
 
 @app.get("/create")
 async def create_doc_content():  
-    drive.CreateFile({'title': 'Hello.txt', 'mimeType': 'text/plain'})
+    #drive.CreateFile({'title': 'Hello.txt', 'mimeType': 'text/plain'})
     return "test"
 
 
