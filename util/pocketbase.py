@@ -7,7 +7,6 @@ load_dotenv()
 PUBLIC_PB_URL = os.getenv('PUBLIC_PB_URL')
 PUBLIC_PB_ADMIN = os.getenv('PUBLIC_PB_ADMIN')
 PUBLIC_PB_PW = os.getenv('PUBLIC_PB_PW')
-
 client = PocketBase(PUBLIC_PB_URL) # type: ignore
 
 class pb_db:

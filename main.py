@@ -4,7 +4,6 @@ from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
 import uvicorn
-from util.gsheet import fetch_google_doc_content
 from util.pocketbase import pb_db
 import os
 
