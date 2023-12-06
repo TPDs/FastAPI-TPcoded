@@ -1,5 +1,6 @@
 .env
 __pycache__/
 client_secrets.json
+tpcoded-docreader.json
 .vscode/
 .venv/
