@@ -1,6 +1,3 @@
-# RC loot parser
+# FastAPI
 
-Parsing data from RC csv files
-
-History per char
-Save on DB or Google sheet?
+Google docs reader and parser to html/js view
