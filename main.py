@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
 import uvicorn
-from util.pocketbase import pb_db
 import os
+from util.pocketbase import pb_db
 from util.lakefs import get_lakefs
 
 
@@ -11,19 +11,26 @@ from util.lakefs import get_lakefs
 load_dotenv() 
 host = os.getenv('HOST')
 app = FastAPI()
-pb = pb_db().get_db()
+
+Pocketbase = pb_db.get_db()
+lake = get_lakefs()
+
+
+@app.get("/data")
+async def pb():
+    result = Pocketbase.collection('project').get_full_list()    
+    return result
 
 
 @app.get("/test")
-async def root():
-    result = pb.collection('project').get_full_list()
-    test = get_lakefs() 
-    return result
+async def lakefs():    
+    
+    return type(lake)
 
 
 @app.get("/")
 async def get_doc_content():  
-    return "test"
+    return "test2"
 
 
 if __name__ == '__main__':
