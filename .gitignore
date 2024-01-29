@@ -5,5 +5,3 @@ client_secret.json
 .venv/*
 venv/*
 datafiles/
-util/__pycache__
-\venv
