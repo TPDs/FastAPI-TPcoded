@@ -1,19 +1,26 @@
 from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
+import whois
 import uvicorn
 import os
 from util.pocketbase import pb_db
-from util.lakefs import get_lakefs
-
-
+from util.lakefs import get_client, get_lakefs_logdata
+from util.whois_parser import ip_parser
 
 load_dotenv() 
 host = os.getenv('HOST')
 app = FastAPI()
 
 Pocketbase = pb_db.get_db()
-lake = get_lakefs()
+lake = get_client()
+
+
+@app.get("/parse")
+async def parser():
+    dataset = ['83.97.73.245','35.239.36.120', '205.210.31.52', '193.106.166.21' ]
+    result = await ip_parser(dataset) 
+    return result
 
 
 @app.get("/data")
@@ -22,15 +29,12 @@ async def pb():
     return result
 
 
-@app.get("/test")
-async def lakefs():    
-    
-    return type(lake)
-
-
 @app.get("/")
-async def get_doc_content():  
-    return "test2"
+async def lakefs():
+    w = whois.whois('https://tpcoded.asuscomm.com/')  
+    print(type(get_lakefs_logdata()))
+    w.text
+    return w
 
 
 if __name__ == '__main__':

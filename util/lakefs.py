@@ -20,7 +20,7 @@ def get_client():
     return clt
 
 
-def get_lakefs():
-    repo = lakefs.Repository("tpcoded", client=clt).branch("main").object("log/morgan.log")
-    print(repo)
+def get_lakefs_logdata():
+    repo = lakefs.Repository("tpcoded", client=clt).branch("main").object("log/morgan.txt")
+    print(repo.reader())
     return repo
