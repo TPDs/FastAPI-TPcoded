@@ -31,10 +31,7 @@ async def pb():
 
 @app.get("/")
 async def lakefs():
-    w = whois.whois('https://tpcoded.asuscomm.com/')  
-    print(type(get_lakefs_logdata()))
-    w.text
-    return w
+    return 'w'
 
 
 if __name__ == '__main__':
