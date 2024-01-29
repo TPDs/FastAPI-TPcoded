@@ -1,6 +1,9 @@
 .env
-__pycache__/
+__pycache__/*
 client_secret.json
-.vscode/
-.venv/
-venv/
+.vscode/*
+.venv/*
+venv/*
+datafiles/
+util/__pycache__
+\venv

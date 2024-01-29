@@ -1,25 +1,31 @@
-import whoisdomain as whois
-from typing import Optional
-from pydantic import BaseModel , validator
+from typing import List, Optional
+from pydantic import BaseModel
+import requests
+from geoip2.database import Reader
+
+geoip_database_path = 'datafiles/GeoLite2-Country.mmdb'
 
 
-class attack_data(BaseModel):
+class AttackData(BaseModel):
     ip: str
-    #city: Optional[str] 
     country: Optional[str]
     payload: str = 'null'  
     CVE: str = 'null'    
     Timestamp: str = 'null'
     attack_link: str = 'null'
 
+async def ip_parser(data: List[str]) -> List[AttackData]:
+    return_list = []    
+    
+    with Reader(geoip_database_path) as reader:
+        for ip in data:
+            try:              
 
-async def ip_parser(data : list):
-    return_list = []
-    for ip in data:
-        w = whois.query(ip)     
-        print(w)      
-        if w is not None:
-            ip_data = attack_data(ip=ip, country=w.registrant_country)        
-            return_list.append(ip_data)
+                response = reader.country(ip)
+                print(response)
+                ip_data = AttackData(ip=ip, country=response.country.name)
+                return_list.append(ip_data)
+            except Exception as e:
+                print(f"Error processing {ip}: {e}")
+    
     return return_list
- 

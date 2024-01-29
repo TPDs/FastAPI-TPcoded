@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
-import whois
 import uvicorn
 import os
 from util.pocketbase import pb_db
