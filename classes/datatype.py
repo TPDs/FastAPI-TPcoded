@@ -1,8 +1,18 @@
 import json
-
+from typing import List, Optional
 import json
 from typing import List
 from pydantic import BaseModel
+
+class AttackData(BaseModel):
+    ip: str
+    country: Optional[str]
+    payload: str = 'null'  
+    CVE: str = 'null'    
+    Timestamp: str = 'null'
+    attack_link: str = 'null'
+
+
 
 class Item(BaseModel):
     name: str

@@ -1,3 +1,6 @@
+from ast import Await
+from math import log
+from re import A
 from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
@@ -5,6 +8,7 @@ import uvicorn
 import os
 from util.pocketbase import pb_db
 from util.lakefs import get_client, get_lakefs_logdata
+from util.transformer import optimzer
 from util.whois_parser import ip_parser
 
 load_dotenv() 
@@ -30,7 +34,9 @@ async def pb():
 
 @app.get("/")
 async def lakefs():
-    return 'w'
+    w = await get_lakefs_logdata()
+    ww = await optimzer(w)   
+    return ww
 
 
 if __name__ == '__main__':

@@ -2,6 +2,8 @@ import lakefs
 from lakefs.client import Client
 import os
 from dotenv import load_dotenv
+import csv
+from collections import deque
 
 load_dotenv()
 
@@ -20,7 +22,8 @@ def get_client():
     return clt
 
 
-def get_lakefs_logdata():
-    repo = lakefs.Repository("tpcoded", client=clt).branch("main").object("log/morgan.txt")
-    print(repo.reader())
-    return repo
+async def get_lakefs_logdata():    
+    repo = lakefs.Repository("tpcoded", client=clt).branch("main")
+    data = repo.object("log/morgan.txt") 
+    return list(csv.reader((data.reader(mode='r'))))[-10:]   ## might get slower overtime as we read all lines, not optimal
+   
