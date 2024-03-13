@@ -1,3 +1,5 @@
+from cgi import print_arguments
+from math import pi
 import lakefs
 from lakefs.client import Client
 import os
@@ -10,6 +12,8 @@ load_dotenv()
 USER = os.getenv('LAKEFS_ID')
 PASSWORD = os.getenv('LAKEFS_ACC')
 
+cleanlist = [' /favicon.ico ', ' / ', '/favicon.ico', '/' , ' / ']
+fakepositive = ['/_app/immutable', '/projectlist/', '/jobpage/', '/aboutme']
 
 clt = Client(
     host="http://192.168.1.25:8000",
@@ -25,5 +29,6 @@ def get_client():
 async def get_lakefs_logdata():    
     repo = lakefs.Repository("tpcoded", client=clt).branch("main")
     data = repo.object("log/morgan.txt") 
-    return list(csv.reader((data.reader(mode='r'))))[-10:]   ## might get slower overtime as we read all lines, not optimal
-   
+    listen = list(csv.reader((data.reader(mode='r'))))[-200:]   ## might get slower overtime as we read all lines, not optimal         
+    listen = [x for x in listen if not any(clean == x[1].split('*-*')[-2] for clean in cleanlist) and not any(fake in x[1].split('*-*')[-2] for fake in fakepositive)]
+    return listen[-10:]

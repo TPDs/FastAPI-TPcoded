@@ -13,17 +13,12 @@ class AttackData(BaseModel):
     attack_link: str = 'null'
 
 
-
-class Item(BaseModel):
-    name: str
-    price: float
-
 class Data(BaseModel):
-    items: List[Item]
+    items: List[AttackData]
 
     @classmethod
     def from_file(cls, filepath: str):
         with open(filepath, 'r') as f:
             data = json.load(f)
-            sorted_items = sorted(data['items'], key=lambda x: x['price'])
+            sorted_items = sorted(data['AttackData'], key=lambda x: x['country'])
             return cls(items=sorted_items)

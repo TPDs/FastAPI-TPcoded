@@ -1,6 +1,3 @@
-from ast import Await
-from math import log
-from re import A
 from fastapi import FastAPI
 from pathlib import Path
 from dotenv import load_dotenv
@@ -21,9 +18,7 @@ lake = get_client()
 
 @app.get("/parse")
 async def parser():
-    dataset = ['83.97.73.245','35.239.36.120', '205.210.31.52', '193.106.166.21' ]
-    result = await ip_parser(dataset) 
-    return result
+    return await get_lakefs_logdata()
 
 
 @app.get("/data")
@@ -35,8 +30,9 @@ async def pb():
 @app.get("/")
 async def lakefs():
     w = await get_lakefs_logdata()
-    ww = await optimzer(w)   
-    return ww
+    ww = await optimzer(w)
+    www = await ip_parser(ww)   
+    return www
 
 
 if __name__ == '__main__':
