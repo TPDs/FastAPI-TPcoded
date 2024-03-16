@@ -1,10 +1,9 @@
 from classes.datatype import AttackData
-from pydantic import BaseModel
 from geoip2.database import Reader
 
 geoip_database_path = 'datafiles/GeoLite2-Country.mmdb'
 
-async def ip_parser(data: list[AttackData]) -> list[AttackData]:
+async def ip_parser(data) -> list[AttackData]:
     return_list = []        
     with Reader(geoip_database_path) as reader:
         for i in data:

@@ -22,3 +22,5 @@ class Data(BaseModel):
             data = json.load(f)
             sorted_items = sorted(data['AttackData'], key=lambda x: x['country'])
             return cls(items=sorted_items)
+
+
