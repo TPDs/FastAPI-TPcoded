@@ -29,6 +29,6 @@ def get_client():
 async def get_lakefs_logdata():    
     repo = lakefs.Repository("tpcoded", client=clt).branch("main")
     data = repo.object("log/morgan.txt") 
-    listen = list(csv.reader((data.reader(mode='r'))))[-100:]   ## might get slower overtime as we read all lines, not optimal         
+    listen = list(csv.reader((data.reader(mode='r'))))[-200:]   ## might get slower overtime as we read all lines, not optimal         
     listen = [x for x in listen if not any(clean == x[1].split('*-*')[-2] for clean in cleanlist) and not any(fake in x[1].split('*-*')[-2] for fake in fakepositive)]
     return listen[-10:]
