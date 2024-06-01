@@ -46,6 +46,8 @@ async def lakefs():
     print('LakeFS')    
     return 'attack_data'
 
+
+@app.get("/update")
 async def updateattackdata():
     try:       
         w = await get_lakefs_logdata()
