@@ -1,0 +1,8 @@
+.env
+__pycache__/
+client_secret.json
+.vscode/
+datafiles/
+venv/
+/datafiles
+/.vscode
