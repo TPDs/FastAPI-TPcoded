@@ -19,11 +19,8 @@ clt = Client(
     host="http://192.168.1.25:8000",
     username=USER,
     password=PASSWORD,
+    verify_ssl=False,
 )
-clt.config.verify_ssl = False
-
-def get_client():
-    return clt
 
 
 async def get_lakefs_logdata():    
