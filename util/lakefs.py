@@ -1,11 +1,9 @@
-from cgi import print_arguments
-from math import pi
 import lakefs
 from lakefs.client import Client
 import os
 from dotenv import load_dotenv
 import csv
-from collections import deque
+
 
 load_dotenv()
 
@@ -16,12 +14,13 @@ cleanlist = [' /favicon.ico ', ' / ', '/favicon.ico', '/' , ' / ']
 fakepositive = ['/_app/immutable', '/projectlist/', '/jobpage/', '/aboutme']
 
 clt = Client(
-    host="http://192.168.1.25:8000",
-    username=USER,
-    password=PASSWORD,
-    verify_ssl=False,
-)
-
+        host="http://192.168.1.25:8000",
+        username=USER,
+        password=PASSWORD,
+        verify_ssl=False,
+    )
+async def get_client():
+    return clt
 
 async def get_lakefs_logdata():    
     repo = lakefs.Repository("tpcoded", client=clt).branch("main")
