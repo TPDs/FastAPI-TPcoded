@@ -69,7 +69,7 @@ async def start_scheduler():
 async def main():       
     await start_scheduler()
     print('Server part 2')   
-    uvicorn.run(f"{Path(__file__).stem}:app", port=5273, host=host, reload=True) # type: ignore
+    uvicorn.run(f"{Path(__file__).stem}:app", port=5273, host=host, reload=False) # type: ignore
 
 if __name__ == '__main__':
     print('Server part 1')
